@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Class Schedule</title>
+</head>
+<body>
+    <h1>Class Schedule</h1>
+
+    <!-- Input form -->
+    <form id="class-form">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" required><br><br>
+
+        <label for="day">Day:</label>
+        <input type="text" id="day" required><br><br>
+
+        <label for="time">Time:</label>
+        <input type="text" id="time" required><br><br>
+
+        <label for="room">Room:</label>
+        <input type="text" id="room" required><br><br>
+
+        <label for="instructor">Instructor:</label>
+        <input type="text" id="instructor" required><br><br>
+
+        <input type="button" value="Submit" onclick="addRow()">
+    </form>
+
+    <br><br>
+
+    <!-- Display data in a table -->
+    <table id="class-table" border="1">
+        <tr>
+            <th>Subject</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Room</th>
+            <th>Instructor</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
+    <script>
+        function addRow() {
+            var subject = document.getElementById("subject").value;
+            var day = document.getElementById("day").value;
+            var time = document.getElementById("time").value;
+            var room = document.getElementById("room").value;
+            var instructor = document.getElementById("instructor").value;
+
+            var table = document.getElementById("class-table");
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+
+            cell1.innerHTML = subject;
+            cell2.innerHTML = day;
+            cell3.innerHTML = time;
+            cell4.innerHTML = room;
+            cell5.innerHTML = instructor;
+            cell6.innerHTML = '<button onclick="editRow(this)">Edit</button> <button onclick="deleteRow(this)">Delete</button>';
+
+            // Clear input fields after adding to the table
+            document.getElementById("subject").value = "";
+            document.getElementById("day").value = "";
+            document.getElementById("time").value = "";
+            document.getElementById("room").value = "";
+            document.getElementById("instructor").value = "";
+        }
+
+        function editRow(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            document.getElementById("subject").value = cells[0].innerHTML;
+            document.getElementById("day").value = cells[1].innerHTML;
+            document.getElementById("time").value = cells[2].innerHTML;
+            document.getElementById("room").value = cells[3].innerHTML;
+            document.getElementById("instructor").value = cells[4].innerHTML;
+            row.parentNode.removeChild(row);
+        }
+
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
